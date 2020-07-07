@@ -124,7 +124,9 @@ Social network for college students to connect with other people taking the same
 ### [BONUS] Digital Wireframes & Mockups
 
 Here is a [link to my Figma design](https://www.figma.com/file/VFafAvbPmBtRSPMrh3fQYV/StudyGroup?node-id=0%3A1)
+
 Here is a [link to a PDF containing each view](./StudyGroup.pdf)
+
 Here is a [link to the .fig file](StudyGroup.fig)
 
 ### [BONUS] Interactive Prototype
