@@ -118,12 +118,18 @@ Social network for college students to connect with other people taking the same
     None
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
+
 <img src="handwritten_wireframe.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
+Here is a [link to my Figma design](https://www.figma.com/file/VFafAvbPmBtRSPMrh3fQYV/StudyGroup?node-id=0%3A1)
+Here is a [link to a PDF containing each view](./StudyGroup.pdf)
+Here is a [link to the .fig file](StudyGroup.fig)
+
 ### [BONUS] Interactive Prototype
+
+Here is the [link to the interactive prototype](https://www.figma.com/proto/VFafAvbPmBtRSPMrh3fQYV/StudyGroup?node-id=1%3A2&viewport=543%2C475%2C0.2948715090751648&scaling=scale-down)
 
 ## Schema 
 [This section will be completed in Unit 9]
