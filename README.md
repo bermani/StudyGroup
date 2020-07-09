@@ -144,7 +144,7 @@ Here is the [link to the interactive prototype](https://www.figma.com/proto/VFaf
 | objectId      | String           | unique id for the user post (default field)    |
 | class         | Pointer to Class | class that post is posted in                   |
 | author        | Pointer to User  | image author                                   |
-| image         | File             | image that user posts                          |
+| image         | File             | image that user posted                         |
 | caption       | String           | image caption by author                        |
 | commentsCount | Number           | number of comments                             |
 | likesCount    | Number           | number of likes for the post                   |
@@ -156,9 +156,9 @@ Here is the [link to the interactive prototype](https://www.figma.com/proto/VFaf
 | Property      | Type            | Description                                    |
 | ------------- | --------------- | ---------------------------------------------- |
 | objectId      | String          | unique id for the user post (default field)    |
-| class         | Pointer to Class | class that post is posted in                   |
+| class         | Pointer to Class | class that post is posted in                  |
 | author        | Pointer to User | post author                                    |
-| content       | String          | text post content                      |
+| content       | String          | text post content                              |
 | commentsCount | Number          | number of comments                             |
 | likesCount    | Number          | number of likes for the post                   |
 | createdAt     | DateTime        | date when post is created (default field)      |
@@ -185,8 +185,10 @@ Here is the [link to the interactive prototype](https://www.figma.com/proto/VFaf
 | objectId      | String           | unique id for the event (default field)        |
 | class         | Pointer to Class | class that post is posted in                   |
 | author        | Pointer to User  | event creator                                  |
-| attachment    | File             | attached file                                  |
-| caption       | String           | file caption by author                         |
+| attendees     | Relation to User | users who have rsvped                          |
+| startDate     | DateTime         | date and time that event starts                |
+| endDate       | DateTime         | date and time that event ends                  |
+| caption       | String           | event caption by author                        |
 | location      | String           | room number or other identifier                |
 | commentsCount | Number           | number of comments                             |
 | likesCount    | Number           | number of likes for the post                   |
