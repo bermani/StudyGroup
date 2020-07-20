@@ -86,10 +86,8 @@ public class CreateTextPostFragment extends Fragment {
             public void onClick(View view) {
                 TextPost post = new TextPost();
                 post.setAuthor(ParseUser.getCurrentUser());
-                post.setAuthorName(ParseUser.getCurrentUser().getUsername());
                 Course selectedCourse = (Course) binding.spinner.getSelectedItem();
                 post.setCourseId(selectedCourse);
-                post.setCourseTitle(selectedCourse.getTitle());
                 post.setContent(binding.etContent.getText().toString());
                 activity.setMyProgressBarVisibility(true);
                 post.saveInBackground(new SaveCallback() {

@@ -76,6 +76,9 @@ public class HomeFragment extends Fragment {
         query.whereContainedIn(TextPost.KEY_COURSE, list);
         query.addDescendingOrder("createdAt");
 
+        query.include(TextPost.KEY_AUTHOR);
+        query.include(TextPost.KEY_COURSE);
+
         query.findInBackground(new FindCallback<TextPost>() {
             @Override
             public void done(List<TextPost> objects, ParseException e) {

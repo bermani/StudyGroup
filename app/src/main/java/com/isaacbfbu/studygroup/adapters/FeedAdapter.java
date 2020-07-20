@@ -11,7 +11,6 @@ import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.ItemFeedBinding;
 import com.isaacbfbu.studygroup.fragments.HomeFragment;
-import com.isaacbfbu.studygroup.models.Course;
 import com.isaacbfbu.studygroup.models.TextPost;
 
 import java.util.List;
