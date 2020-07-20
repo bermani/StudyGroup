@@ -110,13 +110,15 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     }
 
     private boolean arrayContains(JSONArray array, String value) {
-        for (int i = 0; i < array.length(); ++i) {
-            try {
-                if (array.getString(i).equals(value)) {
-                    return true;
+        if (array != null) {
+            for (int i = 0; i < array.length(); ++i) {
+                try {
+                    if (array.getString(i).equals(value)) {
+                        return true;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
         return false;

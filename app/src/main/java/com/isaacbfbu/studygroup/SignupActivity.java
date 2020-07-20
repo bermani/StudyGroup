@@ -59,6 +59,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 // navigate to the main activity of the user has signed in properly
                 goMainActivity();
+                finish();
                 Toast.makeText(SignupActivity.this, "Success!", Toast.LENGTH_SHORT).show();
             }
         });

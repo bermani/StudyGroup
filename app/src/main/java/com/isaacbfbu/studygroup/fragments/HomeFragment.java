@@ -85,11 +85,13 @@ public class HomeFragment extends Fragment {
 
     private List<String> jsonArrayToArrayList(JSONArray array) {
         ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < array.length(); ++i) {
-            try {
-                result.add(array.getString(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (array != null) {
+            for (int i = 0; i < array.length(); ++i) {
+                try {
+                    result.add(array.getString(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return result;

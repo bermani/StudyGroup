@@ -48,5 +48,12 @@ public class AddFragment extends Fragment {
                 activity.goForward(new CreateTextPostFragment());
             }
         });
+
+        binding.ivClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.goForward(new CreateCourseFragment());
+            }
+        });
     }
 }
