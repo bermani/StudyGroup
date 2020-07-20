@@ -2,65 +2,115 @@ package com.isaacbfbu.studygroup.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
+import com.isaacbfbu.studygroup.adapters.ResultsAdapter;
+import com.isaacbfbu.studygroup.databinding.FragmentSearchBinding;
+import com.isaacbfbu.studygroup.models.Course;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = "SearchFragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentSearchBinding binding;
+    private MainActivity activity;
+    private MenuItem miProgressBar;
+
+    private SearchView searchView;
+    private SearchView.OnQueryTextListener queryTextListener;
+
+    private ResultsAdapter adapter;
+    private List<Course> results;
+
+
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        setHasOptionsMenu(true);
+        activity = (MainActivity) getActivity();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+        miProgressBar = menu.findItem(R.id.miActionProgress);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // RecyclerView setup
+        RecyclerView rvResults = binding.rvResults;
+        results = new ArrayList<>();
+        adapter = new ResultsAdapter(activity, results);
+        rvResults.setAdapter(adapter);
+        rvResults.setLayoutManager(new LinearLayoutManager(activity));
+
+        // Search setup
+        binding.svSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                ParseQuery<Course> query = ParseQuery.getQuery("Course");
+                query.whereContains("title",s);
+
+                miProgressBar.setVisible(true);
+
+                query.findInBackground(new FindCallback<Course>() {
+                    @Override
+                    public void done(List<Course> courses, ParseException e) {
+                        miProgressBar.setVisible(false);
+                        if (e != null) {
+                            Log.e(TAG, "Issue getting search results", e);
+                            return;
+                        }
+                        adapter.clear();
+                        adapter.addAll(courses);
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 }
