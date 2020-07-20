@@ -15,6 +15,7 @@ import com.isaacbfbu.studygroup.LoginActivity;
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentProfileBinding;
+import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
 
@@ -54,5 +55,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        binding.tvUsername.setText(ParseUser.getCurrentUser().getUsername());
     }
 }

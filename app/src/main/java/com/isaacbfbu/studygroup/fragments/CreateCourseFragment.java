@@ -50,6 +50,7 @@ public class CreateCourseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // button logic
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {

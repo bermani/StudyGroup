@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
 
     MainActivity activity;
     FragmentHomeBinding binding;
+    SwipeRefreshLayout swipeContainer;
 
     List<TextPost> results;
     FeedAdapter adapter;
@@ -68,7 +70,19 @@ public class HomeFragment extends Fragment {
         rvResults.setAdapter(adapter);
         rvResults.setLayoutManager(new LinearLayoutManager(activity));
 
-        // query
+        swipeContainer = binding.swipeContainer;
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                getPosts();
+            }
+        });
+
+        getPosts();
+    }
+
+    private void getPosts() {
         ParseQuery<TextPost> query = ParseQuery.getQuery("TextPost");
 
         List<String> list = JSONArrayUtils.jsonArrayToArrayList(ParseUser.getCurrentUser().getJSONArray("enrolled"));
@@ -83,6 +97,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void done(List<TextPost> objects, ParseException e) {
                 adapter.addAll(objects);
+                swipeContainer.setRefreshing(false);
             }
         });
     }
