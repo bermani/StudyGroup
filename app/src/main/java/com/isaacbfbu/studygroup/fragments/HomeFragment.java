@@ -18,6 +18,7 @@ import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.adapters.FeedAdapter;
 import com.isaacbfbu.studygroup.databinding.FragmentHomeBinding;
 import com.isaacbfbu.studygroup.models.TextPost;
+import com.isaacbfbu.studygroup.utils.JSONArrayUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -70,7 +71,7 @@ public class HomeFragment extends Fragment {
         // query
         ParseQuery<TextPost> query = ParseQuery.getQuery("TextPost");
 
-        List<String> list = jsonArrayToArrayList(ParseUser.getCurrentUser().getJSONArray("enrolled"));
+        List<String> list = JSONArrayUtils.jsonArrayToArrayList(ParseUser.getCurrentUser().getJSONArray("enrolled"));
 
         query.whereContainedIn(TextPost.KEY_COURSE, list);
         query.addDescendingOrder("createdAt");
@@ -81,19 +82,5 @@ public class HomeFragment extends Fragment {
                 adapter.addAll(objects);
             }
         });
-    }
-
-    private List<String> jsonArrayToArrayList(JSONArray array) {
-        ArrayList<String> result = new ArrayList<>();
-        if (array != null) {
-            for (int i = 0; i < array.length(); ++i) {
-                try {
-                    result.add(array.getString(i));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return result;
     }
 }

@@ -75,17 +75,4 @@ public class CreateCourseFragment extends Fragment {
             }
         });
     }
-
-    private boolean arrayContains(JSONArray array, String value) {
-        for (int i = 0; i < array.length(); ++i) {
-            try {
-                if (array.getString(i).equals(value)) {
-                    return true;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
 }

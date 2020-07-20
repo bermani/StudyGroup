@@ -16,6 +16,7 @@ import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.ItemResultBinding;
 import com.isaacbfbu.studygroup.fragments.SearchFragment;
 import com.isaacbfbu.studygroup.models.Course;
+import com.isaacbfbu.studygroup.utils.JSONArrayUtils;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -68,7 +69,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
 
         public void bind(final Course course) {
             binding.tvTitle.setText(course.getTitle());
-            if (arrayContains(ParseUser.getCurrentUser().getJSONArray("enrolled"), course.getObjectId())) {
+            if (JSONArrayUtils.arrayContains(ParseUser.getCurrentUser().getJSONArray("enrolled"), course.getObjectId())) {
                 binding.btnEnroll.setText("unenroll");
             } else {
                 binding.btnEnroll.setText("enroll");
@@ -77,7 +78,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
                 @Override
                 public void onClick(View view) {
                     final ParseUser user = ParseUser.getCurrentUser();
-                    if (arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
+                    if (JSONArrayUtils.arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
                         ParseUser.getCurrentUser().removeAll("enrolled", Arrays.asList(course.getObjectId()));
                     } else {
                         ParseUser.getCurrentUser().addUnique("enrolled", course.getObjectId());
@@ -87,7 +88,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
                         @Override
                         public void done(ParseException e) {
                             context.setMyProgressBarVisibility(false);
-                            if (arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
+                            if (JSONArrayUtils.arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
                                 binding.btnEnroll.setText("unenroll");
                             } else {
                                 binding.btnEnroll.setText("enroll");
@@ -109,18 +110,5 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-    private boolean arrayContains(JSONArray array, String value) {
-        if (array != null) {
-            for (int i = 0; i < array.length(); ++i) {
-                try {
-                    if (array.getString(i).equals(value)) {
-                        return true;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
+
 }

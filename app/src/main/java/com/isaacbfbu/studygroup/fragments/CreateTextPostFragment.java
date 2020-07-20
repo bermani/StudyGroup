@@ -17,6 +17,7 @@ import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentCreateTextPostBinding;
 import com.isaacbfbu.studygroup.models.Course;
 import com.isaacbfbu.studygroup.models.TextPost;
+import com.isaacbfbu.studygroup.utils.JSONArrayUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -65,7 +66,7 @@ public class CreateTextPostFragment extends Fragment {
 
         // query to setup spinner
         ParseQuery<Course> query = ParseQuery.getQuery("Course");
-        query.whereContainedIn("objectId", jsonArrayToArrayList(ParseUser.getCurrentUser().getJSONArray("enrolled")));
+        query.whereContainedIn("objectId", JSONArrayUtils.jsonArrayToArrayList(ParseUser.getCurrentUser().getJSONArray("enrolled")));
         query.findInBackground(new FindCallback<Course>() {
             @Override
             public void done(List<Course> objects, ParseException e) {
@@ -100,19 +101,5 @@ public class CreateTextPostFragment extends Fragment {
                 });
             }
         });
-    }
-
-    private List<String> jsonArrayToArrayList(JSONArray array) {
-        ArrayList<String> result = new ArrayList<>();
-        if (array != null) {
-            for (int i = 0; i < array.length(); ++i) {
-                try {
-                    result.add(array.getString(i));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return result;
     }
 }
