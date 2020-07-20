@@ -79,7 +79,7 @@ public class SearchFragment extends Fragment {
         // RecyclerView setup
         RecyclerView rvResults = binding.rvResults;
         results = new ArrayList<>();
-        adapter = new ResultsAdapter(activity, results);
+        adapter = new ResultsAdapter(activity, results, this);
         rvResults.setAdapter(adapter);
         rvResults.setLayoutManager(new LinearLayoutManager(activity));
 
@@ -90,12 +90,12 @@ public class SearchFragment extends Fragment {
                 ParseQuery<Course> query = ParseQuery.getQuery("Course");
                 query.whereContains("title",s);
 
-                miProgressBar.setVisible(true);
+                setProgressBarVisibility(true);
 
                 query.findInBackground(new FindCallback<Course>() {
                     @Override
                     public void done(List<Course> courses, ParseException e) {
-                        miProgressBar.setVisible(false);
+                        setProgressBarVisibility(false);
                         if (e != null) {
                             Log.e(TAG, "Issue getting search results", e);
                             return;
@@ -112,5 +112,9 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
+    }
+
+    public void setProgressBarVisibility(boolean b) {
+        miProgressBar.setVisible(b);
     }
 }

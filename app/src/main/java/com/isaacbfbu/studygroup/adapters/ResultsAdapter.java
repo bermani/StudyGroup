@@ -1,28 +1,43 @@
 package com.isaacbfbu.studygroup.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.ItemResultBinding;
+import com.isaacbfbu.studygroup.fragments.SearchFragment;
 import com.isaacbfbu.studygroup.models.Course;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
 
+    private static final String TAG = "ResultsAdapter";
+
     Context context;
     List<Course> results;
+    SearchFragment fragment;
 
-    public ResultsAdapter(Context context, List<Course> results) {
+    public ResultsAdapter(Context context, List<Course> results, SearchFragment fragment) {
         this.context = context;
         this.results = results;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -51,8 +66,36 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
             binding = ItemResultBinding.bind(itemView);
         }
 
-        public void bind(Course course) {
+        public void bind(final Course course) {
             binding.tvTitle.setText(course.getTitle());
+            if (arrayContains(ParseUser.getCurrentUser().getJSONArray("enrolled"), course.getObjectId())) {
+                binding.btnEnroll.setText("unenroll");
+            } else {
+                binding.btnEnroll.setText("enroll");
+            }
+            binding.btnEnroll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final ParseUser user = ParseUser.getCurrentUser();
+                    if (arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
+                        ParseUser.getCurrentUser().removeAll("enrolled", Arrays.asList(course.getObjectId()));
+                    } else {
+                        ParseUser.getCurrentUser().addUnique("enrolled", course.getObjectId());
+                    }
+                   fragment.setProgressBarVisibility(true);
+                    ParseUser.getCurrentUser().saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            fragment.setProgressBarVisibility(false);
+                            if (arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
+                                binding.btnEnroll.setText("unenroll");
+                            } else {
+                                binding.btnEnroll.setText("enroll");
+                            }
+                        }
+                    });
+                }
+            });
         }
     }
 
@@ -64,5 +107,18 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     public void addAll(List<Course> list) {
         results.addAll(list);
         notifyDataSetChanged();
+    }
+
+    private boolean arrayContains(JSONArray array, String value) {
+        for (int i = 0; i < array.length(); ++i) {
+            try {
+                if (array.getString(i).equals(value)) {
+                    return true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }

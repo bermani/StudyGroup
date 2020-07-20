@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = calendarFragment;
                                 break;
                             case R.id.action_profile:
+                                fragment = profileFragment;
+                                break;
                             default:
                                 fragment = homeFragment;
                                 break;
