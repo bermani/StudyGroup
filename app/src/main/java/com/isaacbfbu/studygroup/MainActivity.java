@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     CalendarFragment calendarFragment;
     ProfileFragment profileFragment;
 
-    private SearchView searchView;
+    private MenuItem miProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         Fragment fragment;
                         switch (item.getItemId()) {
                             case R.id.action_search:
@@ -83,13 +84,30 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         // Set default selection
-        binding.bottomNavigation.setSelectedItemId(R.id.action_home);
+        goHome();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        miProgressBar = menu.findItem(R.id.miActionProgress);
+        return super.onCreateOptionsMenu(menu);
+    }
 
 
     public void goBack() {
         fragmentManager.popBackStackImmediate();
+    }
+
+    public void goForward(Fragment fragment) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.flContainer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void goHome() {
+        binding.bottomNavigation.setSelectedItemId(R.id.action_home);
     }
 
     public void logout() {
@@ -110,5 +128,9 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void setMyProgressBarVisibility(boolean b) {
+        miProgressBar.setVisible(b);
     }
 }

@@ -17,4 +17,8 @@ public class Course extends ParseObject {
     public void setTitle(String title) {
         put(KEY_TITLE, title);
     }
+
+    public String toString() {
+        return getTitle();
+    }
 }

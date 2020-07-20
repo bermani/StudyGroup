@@ -35,15 +35,9 @@ public class SearchFragment extends Fragment {
 
     private FragmentSearchBinding binding;
     private MainActivity activity;
-    private MenuItem miProgressBar;
-
-    private SearchView searchView;
-    private SearchView.OnQueryTextListener queryTextListener;
 
     private ResultsAdapter adapter;
     private List<Course> results;
-
-
 
     public SearchFragment() {
         // Required empty public constructor
@@ -58,13 +52,6 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-        miProgressBar = menu.findItem(R.id.miActionProgress);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -75,6 +62,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         // RecyclerView setup
         RecyclerView rvResults = binding.rvResults;
@@ -90,12 +79,12 @@ public class SearchFragment extends Fragment {
                 ParseQuery<Course> query = ParseQuery.getQuery("Course");
                 query.whereContains("title",s);
 
-                setProgressBarVisibility(true);
+                activity.setMyProgressBarVisibility(true);
 
                 query.findInBackground(new FindCallback<Course>() {
                     @Override
                     public void done(List<Course> courses, ParseException e) {
-                        setProgressBarVisibility(false);
+                        activity.setMyProgressBarVisibility(false);
                         if (e != null) {
                             Log.e(TAG, "Issue getting search results", e);
                             return;
@@ -114,7 +103,5 @@ public class SearchFragment extends Fragment {
         });
     }
 
-    public void setProgressBarVisibility(boolean b) {
-        miProgressBar.setVisible(b);
-    }
+
 }

@@ -30,11 +30,11 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
 
     private static final String TAG = "ResultsAdapter";
 
-    Context context;
+    MainActivity context;
     List<Course> results;
     SearchFragment fragment;
 
-    public ResultsAdapter(Context context, List<Course> results, SearchFragment fragment) {
+    public ResultsAdapter(MainActivity context, List<Course> results, SearchFragment fragment) {
         this.context = context;
         this.results = results;
         this.fragment = fragment;
@@ -82,11 +82,11 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
                     } else {
                         ParseUser.getCurrentUser().addUnique("enrolled", course.getObjectId());
                     }
-                   fragment.setProgressBarVisibility(true);
+                    context.setMyProgressBarVisibility(true);
                     ParseUser.getCurrentUser().saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-                            fragment.setProgressBarVisibility(false);
+                            context.setMyProgressBarVisibility(false);
                             if (arrayContains(user.getJSONArray("enrolled"), course.getObjectId())) {
                                 binding.btnEnroll.setText("unenroll");
                             } else {

@@ -3,6 +3,7 @@ package com.isaacbfbu.studygroup;
 import android.app.Application;
 
 import com.isaacbfbu.studygroup.models.Course;
+import com.isaacbfbu.studygroup.models.TextPost;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -15,6 +16,7 @@ public class ParseApplication extends Application {
         super.onCreate();
 
         ParseObject.registerSubclass(Course.class);
+        ParseObject.registerSubclass(TextPost.class);
 
         // Use for troubleshooting -- remove this line for production
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
