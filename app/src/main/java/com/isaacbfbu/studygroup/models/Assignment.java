@@ -4,25 +4,28 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-@ParseClassName("TextPost")
-public class TextPost extends ParseObject {
-    public static final String KEY_CONTENT = "content";
+import java.util.Date;
+
+@ParseClassName("Assignment")
+public class Assignment extends ParseObject {
+    public static final String KEY_TITLE = "title";
     public static final String KEY_COURSE = "course";
     public static final String KEY_AUTHOR = "author";
+    public static final String KEY_DATE = "dueDate";
 
-    public String getContent() {
-        return getString(KEY_CONTENT);
+    public String getTitle() {
+        return getString(KEY_TITLE);
     }
 
-    public void setContent(String content) {
-        put(KEY_CONTENT, content);
+    public void setTitle(String title) {
+        put(KEY_TITLE, title);
     }
 
-    public Course getCourse() {
-        return (Course) getParseObject(KEY_COURSE);
+    public String getCourseId() {
+        return getParseObject(KEY_COURSE).getObjectId();
     }
 
-    public void setCourse(Course course) {
+    public void setCourseId(Course course) {
         put(KEY_COURSE, course);
     }
 
@@ -40,5 +43,13 @@ public class TextPost extends ParseObject {
 
     public String getAuthorName() {
         return getParseUser(KEY_AUTHOR).getUsername();
+    }
+
+    public Date getDueDate() {
+        return getDate(KEY_DATE);
+    }
+
+    public void setDate(Date date) {
+        put(KEY_DATE, date);
     }
 }

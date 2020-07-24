@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.ItemFeedBinding;
+import com.isaacbfbu.studygroup.fragments.CourseDetailFragment;
 import com.isaacbfbu.studygroup.fragments.HomeFragment;
+import com.isaacbfbu.studygroup.fragments.PostDetailFragment;
+import com.isaacbfbu.studygroup.fragments.UserDetailFragment;
 import com.isaacbfbu.studygroup.models.TextPost;
 
 import java.util.List;
@@ -53,10 +56,34 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             binding = ItemFeedBinding.bind(itemView);
         }
 
-        public void bind(TextPost textPost) {
+        public void bind(final TextPost textPost) {
             binding.tvContent.setText(textPost.getContent());
             binding.tvName.setText(textPost.getAuthorName());
             binding.tvCourse.setText(textPost.getCourseTitle());
+
+            binding.tvContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PostDetailFragment fragment = PostDetailFragment.newInstance(textPost);
+                    context.goForward(fragment);
+                }
+            });
+
+            binding.tvName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    UserDetailFragment fragment = UserDetailFragment.newInstance(textPost.getAuthor());
+                    context.goForward(fragment);
+                }
+            });
+
+            binding.tvCourse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CourseDetailFragment fragment = CourseDetailFragment.newInstance(textPost.getCourse());
+                    context.goForward(fragment);
+                }
+            });
         }
     }
 
