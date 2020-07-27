@@ -133,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setMyProgressBarVisibility(boolean b) {
-        miProgressBar.setVisible(b);
+        if (miProgressBar != null) {
+            miProgressBar.setVisible(b);
+        }
     }
 }

@@ -33,6 +33,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    public static final String TAG = "HomeFragment";
+
     MainActivity activity;
     FragmentHomeBinding binding;
     SwipeRefreshLayout swipeContainer;
@@ -93,11 +95,17 @@ public class HomeFragment extends Fragment {
         query.include(TextPost.KEY_AUTHOR);
         query.include(TextPost.KEY_COURSE);
 
+        activity.setMyProgressBarVisibility(true);
         query.findInBackground(new FindCallback<TextPost>() {
             @Override
             public void done(List<TextPost> objects, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue getting posts", e);
+                    return;
+                }
                 adapter.addAll(objects);
                 swipeContainer.setRefreshing(false);
+                activity.setMyProgressBarVisibility(false);
             }
         });
     }
