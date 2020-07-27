@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goForward(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.flContainer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
