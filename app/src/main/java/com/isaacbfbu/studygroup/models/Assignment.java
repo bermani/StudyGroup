@@ -21,11 +21,11 @@ public class Assignment extends ParseObject {
         put(KEY_TITLE, title);
     }
 
-    public String getCourseId() {
-        return getParseObject(KEY_COURSE).getObjectId();
+    public Course getCourse() {
+        return (Course) getParseObject(KEY_COURSE);
     }
 
-    public void setCourseId(Course course) {
+    public void setCourse(Course course) {
         put(KEY_COURSE, course);
     }
 

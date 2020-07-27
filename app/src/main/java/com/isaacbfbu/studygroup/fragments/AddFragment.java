@@ -55,5 +55,11 @@ public class AddFragment extends Fragment {
                 activity.goForward(new CreateCourseFragment());
             }
         });
+        binding.ivAssignment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.goForward(new CreateAssignmentFragment());
+            }
+        });
     }
 }

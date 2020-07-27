@@ -29,6 +29,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPrompt" />
 
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text Post"
+        app:layout_constraintEnd_toEndOf="@+id/ivText"
+        app:layout_constraintStart_toStartOf="@+id/ivText"
+        app:layout_constraintTop_toBottomOf="@+id/ivText" />
+
     <ImageButton
         android:id="@+id/ivClass"
         android:layout_width="96dp"
@@ -41,15 +50,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPrompt" />
 
     <TextView
-        android:id="@+id/tvText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Text Post"
-        app:layout_constraintEnd_toEndOf="@+id/ivText"
-        app:layout_constraintStart_toStartOf="@+id/ivText"
-        app:layout_constraintTop_toBottomOf="@+id/ivText" />
-
-    <TextView
         android:id="@+id/tvClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,5 +57,25 @@
         app:layout_constraintEnd_toEndOf="@+id/ivClass"
         app:layout_constraintStart_toStartOf="@+id/ivClass"
         app:layout_constraintTop_toBottomOf="@+id/ivClass" />
+
+    <ImageButton
+        android:id="@+id/ivAssignment"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/assignment_24px"
+        app:layout_constraintEnd_toStartOf="@+id/ivClass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvText" />
+
+    <TextView
+        android:id="@+id/tvAssignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assignment"
+        app:layout_constraintEnd_toEndOf="@+id/ivAssignment"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="@+id/ivAssignment"
+        app:layout_constraintTop_toBottomOf="@id/ivAssignment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
