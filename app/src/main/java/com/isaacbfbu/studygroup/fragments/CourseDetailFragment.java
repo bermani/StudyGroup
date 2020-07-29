@@ -15,6 +15,7 @@ import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentCourseDetailBinding;
 import com.isaacbfbu.studygroup.databinding.FragmentUserDetailBinding;
 import com.isaacbfbu.studygroup.models.Course;
+import com.isaacbfbu.studygroup.utils.OnSwipeTouchListener;
 import com.parse.ParseUser;
 
 public class CourseDetailFragment extends Fragment {

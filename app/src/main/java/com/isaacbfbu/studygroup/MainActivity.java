@@ -23,6 +23,7 @@ import com.isaacbfbu.studygroup.fragments.CalendarFragment;
 import com.isaacbfbu.studygroup.fragments.HomeFragment;
 import com.isaacbfbu.studygroup.fragments.ProfileFragment;
 import com.isaacbfbu.studygroup.fragments.SearchFragment;
+import com.isaacbfbu.studygroup.utils.OnSwipeTouchListener;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         // Set default selection
+        binding.layout.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeRight() {
+                goBack();
+            }
+        });
         goHome();
     }
 
