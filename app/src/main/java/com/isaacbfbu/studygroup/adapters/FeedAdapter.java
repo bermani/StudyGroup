@@ -67,7 +67,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             if (image != null) {
                 url = image.getUrl();
             }
-            Glide.with(context).load(url).placeholder(R.drawable.person_24px).into(binding.ivProfilePhoto);
+            Glide.with(context).load(url).placeholder(R.drawable.person_24px).circleCrop().into(binding.ivProfilePhoto);
 
             binding.tvContent.setOnClickListener(new View.OnClickListener() {
                 @Override
