@@ -15,21 +15,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/ivProfilePhoto"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="name" />
 
         <TextView
             android:id="@+id/tvCourse"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="course" />
     </LinearLayout>
 

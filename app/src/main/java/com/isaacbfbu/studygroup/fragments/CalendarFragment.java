@@ -95,6 +95,7 @@ public class CalendarFragment extends Fragment {
 
         query.whereContainedIn(Assignment.KEY_COURSE, list);
 
+        activity.setMyProgressBarVisibility(true);
         query.findInBackground(new FindCallback<Assignment>() {
             @Override
             public void done(List<Assignment> objects, ParseException e) {
@@ -119,6 +120,7 @@ public class CalendarFragment extends Fragment {
                         view.addSpan(new DotSpan(5, Color.RED));
                     }
                 });
+                activity.setMyProgressBarVisibility(false);
             }
         });
     }

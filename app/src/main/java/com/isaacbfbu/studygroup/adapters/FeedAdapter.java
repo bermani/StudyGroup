@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.ItemFeedBinding;
@@ -15,6 +16,7 @@ import com.isaacbfbu.studygroup.fragments.HomeFragment;
 import com.isaacbfbu.studygroup.fragments.PostDetailFragment;
 import com.isaacbfbu.studygroup.fragments.UserDetailFragment;
 import com.isaacbfbu.studygroup.models.TextPost;
+import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -60,6 +62,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             binding.tvContent.setText(textPost.getContent());
             binding.tvName.setText(textPost.getAuthorName());
             binding.tvCourse.setText(textPost.getCourseTitle());
+            ParseFile image = textPost.getAuthor().getParseFile("profilePhoto");
+            String url = "";
+            if (image != null) {
+                url = image.getUrl();
+            }
+            Glide.with(context).load(url).placeholder(R.drawable.person_24px).into(binding.ivProfilePhoto);
 
             binding.tvContent.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,6 +78,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             });
 
             binding.tvName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    UserDetailFragment fragment = UserDetailFragment.newInstance(textPost.getAuthor());
+                    context.goForward(fragment);
+                }
+            });
+
+            binding.ivProfilePhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     UserDetailFragment fragment = UserDetailFragment.newInstance(textPost.getAuthor());
