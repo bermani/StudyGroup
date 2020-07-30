@@ -1,27 +1,20 @@
 package com.isaacbfbu.studygroup.fragments;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentCalendarBinding;
 import com.isaacbfbu.studygroup.models.Assignment;
-import com.isaacbfbu.studygroup.models.TextPost;
 import com.isaacbfbu.studygroup.utils.JSONArrayUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -32,12 +25,9 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.ZoneId;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

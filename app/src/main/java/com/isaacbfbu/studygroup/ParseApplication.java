@@ -8,12 +8,6 @@ import com.isaacbfbu.studygroup.models.TextPost;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 

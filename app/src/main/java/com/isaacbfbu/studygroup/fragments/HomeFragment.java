@@ -1,6 +1,10 @@
 package com.isaacbfbu.studygroup.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,13 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.isaacbfbu.studygroup.MainActivity;
-import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.adapters.FeedAdapter;
 import com.isaacbfbu.studygroup.databinding.FragmentHomeBinding;
 import com.isaacbfbu.studygroup.models.TextPost;
@@ -24,9 +22,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,28 +5,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.ItemCourseBinding;
-import com.isaacbfbu.studygroup.fragments.SearchFragment;
 import com.isaacbfbu.studygroup.models.Course;
 import com.isaacbfbu.studygroup.utils.BindingUtils;
 
 import java.util.List;
 
-public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
+public class EnrolledCoursesAdapter extends RecyclerView.Adapter<EnrolledCoursesAdapter.ViewHolder> {
 
-    private static final String TAG = "ResultsAdapter";
+    private static final String TAG = "EnrolledCoursesAdapter";
 
     MainActivity context;
-    List<Course> results;
-    SearchFragment fragment;
+    List<Course> courses;
+    Fragment fragment;
 
-    public ResultsAdapter(MainActivity context, List<Course> results, SearchFragment fragment) {
+    public EnrolledCoursesAdapter(MainActivity context, List<Course> courses, Fragment fragment) {
         this.context = context;
-        this.results = results;
+        this.courses = courses;
         this.fragment = fragment;
     }
 
@@ -39,12 +39,12 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(results.get(position));
+        holder.bind(courses.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return results.size();
+        return courses.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,12 +62,12 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     }
 
     public void clear() {
-        results.clear();
+        courses.clear();
         notifyDataSetChanged();
     }
 
     public void addAll(List<Course> list) {
-        results.addAll(list);
+        courses.addAll(list);
         notifyDataSetChanged();
     }
 

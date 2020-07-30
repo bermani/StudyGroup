@@ -1,15 +1,13 @@
 package com.isaacbfbu.studygroup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.isaacbfbu.studygroup.MainActivity;
-import com.isaacbfbu.studygroup.SignupActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.isaacbfbu.studygroup.databinding.ActivityLoginBinding;
 import com.parse.LogInCallback;
 import com.parse.ParseException;

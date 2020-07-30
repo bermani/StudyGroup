@@ -7,6 +7,7 @@ import com.parse.ParseObject;
 public class Course extends ParseObject {
 
     public static final String KEY_TITLE = "title";
+    public static final String KEY_COUNT = "enrolledCount";
 
     public Course() {}
 
@@ -20,5 +21,9 @@ public class Course extends ParseObject {
 
     public String toString() {
         return getTitle();
+    }
+
+    public int getEnrolledCount() {
+        return getInt(KEY_COUNT);
     }
 }

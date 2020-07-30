@@ -1,28 +1,20 @@
 package com.isaacbfbu.studygroup.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.isaacbfbu.studygroup.MainActivity;
-import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentCreateCourseBinding;
-import com.isaacbfbu.studygroup.databinding.FragmentCreateTextPostBinding;
 import com.isaacbfbu.studygroup.models.Course;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.Arrays;
 
 public class CreateCourseFragment extends Fragment {
 

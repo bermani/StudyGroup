@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.R;
-import com.isaacbfbu.studygroup.databinding.ItemFeedBinding;
+import com.isaacbfbu.studygroup.databinding.ItemPostBinding;
 import com.isaacbfbu.studygroup.fragments.CourseDetailFragment;
 import com.isaacbfbu.studygroup.fragments.HomeFragment;
 import com.isaacbfbu.studygroup.fragments.PostDetailFragment;
@@ -35,7 +35,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_feed, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         return new FeedAdapter.ViewHolder(view);
     }
 
@@ -51,11 +51,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ItemFeedBinding binding;
+        ItemPostBinding binding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            binding = ItemFeedBinding.bind(itemView);
+            binding = ItemPostBinding.bind(itemView);
         }
 
         public void bind(final TextPost textPost) {

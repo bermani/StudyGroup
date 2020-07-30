@@ -1,22 +1,17 @@
 package com.isaacbfbu.studygroup.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.isaacbfbu.studygroup.MainActivity;
-import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentCourseDetailBinding;
-import com.isaacbfbu.studygroup.databinding.FragmentUserDetailBinding;
 import com.isaacbfbu.studygroup.models.Course;
-import com.isaacbfbu.studygroup.utils.OnSwipeTouchListener;
-import com.parse.ParseUser;
 
 public class CourseDetailFragment extends Fragment {
 
