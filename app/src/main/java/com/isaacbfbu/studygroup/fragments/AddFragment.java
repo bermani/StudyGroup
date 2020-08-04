@@ -47,6 +47,13 @@ public class AddFragment extends Fragment {
             }
         });
 
+        binding.ivImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.goForward(new CreateImagePostFragment());
+            }
+        });
+
         binding.ivClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

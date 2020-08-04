@@ -39,24 +39,24 @@
         app:layout_constraintTop_toBottomOf="@+id/ivText" />
 
     <ImageButton
-        android:id="@+id/ivClass"
+        android:id="@+id/ivImage"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/class_24px"
+        android:src="@drawable/camera_24px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivText"
         app:layout_constraintTop_toBottomOf="@+id/tvPrompt" />
 
     <TextView
-        android:id="@+id/tvClass"
+        android:id="@+id/tvImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Course"
-        app:layout_constraintEnd_toEndOf="@+id/ivClass"
-        app:layout_constraintStart_toStartOf="@+id/ivClass"
-        app:layout_constraintTop_toBottomOf="@+id/ivClass" />
+        android:text="Image Post"
+        app:layout_constraintEnd_toEndOf="@+id/ivImage"
+        app:layout_constraintStart_toStartOf="@+id/ivImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
 
     <ImageButton
         android:id="@+id/ivAssignment"
@@ -77,5 +77,25 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/ivAssignment"
         app:layout_constraintTop_toBottomOf="@id/ivAssignment" />
+
+    <ImageButton
+        android:id="@+id/ivClass"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/class_24px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivAssignment"
+        app:layout_constraintTop_toBottomOf="@+id/tvImage" />
+
+    <TextView
+        android:id="@+id/tvClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Course"
+        app:layout_constraintEnd_toEndOf="@+id/ivClass"
+        app:layout_constraintStart_toStartOf="@+id/ivClass"
+        app:layout_constraintTop_toBottomOf="@+id/ivClass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

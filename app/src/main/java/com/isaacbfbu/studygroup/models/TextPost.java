@@ -2,6 +2,7 @@ package com.isaacbfbu.studygroup.models;
 
 import com.isaacbfbu.studygroup.utils.ParseUtils;
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -13,6 +14,7 @@ public class TextPost extends ParseObject {
     public static final String KEY_COURSE = "course";
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_REPORTS = "reports";
+    public static final String KEY_IMAGE = "image";
 
     public String getContent() {
         return getString(KEY_CONTENT);
@@ -53,5 +55,13 @@ public class TextPost extends ParseObject {
     public void addToReports() {
         String userId = ParseUser.getCurrentUser().getObjectId();
         add(KEY_REPORTS, userId);
+    }
+
+    public void setImage(ParseFile image) {
+        put(KEY_IMAGE, image);
+    }
+
+    public ParseFile getImage() {
+        return getParseFile(KEY_IMAGE);
     }
 }

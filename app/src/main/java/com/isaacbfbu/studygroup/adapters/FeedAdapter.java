@@ -65,6 +65,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             binding.tvCourse.setText(textPost.getCourseTitle());
             String url = ParseUtils.getProfilePhotoURL(textPost.getAuthor());
             Glide.with(context).load(url).placeholder(R.drawable.person_24px).circleCrop().into(binding.ivProfilePhoto);
+            ParseFile image = textPost.getImage();
+            if (image != null) {
+                Glide.with(context).load(image.getUrl()).into(binding.ivPost);
+            } else {
+                binding.ivPost.setVisibility(View.GONE);
+            }
 
             binding.tvContent.setOnClickListener(new View.OnClickListener() {
                 @Override
