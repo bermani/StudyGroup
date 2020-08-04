@@ -1,5 +1,6 @@
 package com.isaacbfbu.studygroup.models;
 
+import com.isaacbfbu.studygroup.utils.ParseUtils;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -42,7 +43,8 @@ public class Assignment extends ParseObject {
     }
 
     public String getAuthorName() {
-        return getParseUser(KEY_AUTHOR).getUsername();
+        
+        return ParseUtils.getUsername(getParseUser(KEY_AUTHOR));
     }
 
     public Date getDueDate() {

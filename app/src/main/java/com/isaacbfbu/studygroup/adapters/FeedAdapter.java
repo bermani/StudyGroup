@@ -16,6 +16,7 @@ import com.isaacbfbu.studygroup.fragments.HomeFragment;
 import com.isaacbfbu.studygroup.fragments.PostDetailFragment;
 import com.isaacbfbu.studygroup.fragments.UserDetailFragment;
 import com.isaacbfbu.studygroup.models.TextPost;
+import com.isaacbfbu.studygroup.utils.ParseUtils;
 import com.parse.ParseFile;
 
 import java.util.List;
@@ -62,11 +63,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             binding.tvContent.setText(textPost.getContent());
             binding.tvName.setText(textPost.getAuthorName());
             binding.tvCourse.setText(textPost.getCourseTitle());
-            ParseFile image = textPost.getAuthor().getParseFile("profilePhoto");
-            String url = "";
-            if (image != null) {
-                url = image.getUrl();
-            }
+            String url = ParseUtils.getProfilePhotoURL(textPost.getAuthor());
             Glide.with(context).load(url).placeholder(R.drawable.person_24px).circleCrop().into(binding.ivProfilePhoto);
 
             binding.tvContent.setOnClickListener(new View.OnClickListener() {

@@ -24,6 +24,7 @@ import com.isaacbfbu.studygroup.adapters.EnrolledCoursesAdapter;
 import com.isaacbfbu.studygroup.databinding.FragmentProfileBinding;
 import com.isaacbfbu.studygroup.models.Course;
 import com.isaacbfbu.studygroup.utils.JSONArrayUtils;
+import com.isaacbfbu.studygroup.utils.ParseUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -79,12 +80,8 @@ public class ProfileFragment extends Fragment {
         });
 
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        binding.tvUsername.setText(currentUser.getUsername());
-        ParseFile image = currentUser.getParseFile("profilePhoto");
-        String url = "";
-        if (image != null) {
-            url = image.getUrl();
-        }
+        binding.tvUsername.setText(ParseUtils.getUsername(currentUser));
+        String url = ParseUtils.getProfilePhotoURL(currentUser);
         Glide.with(activity).load(url).placeholder(R.drawable.person_24px).circleCrop().into(binding.ivProfilePhoto);
 
         final Fragment that = this;

@@ -7,6 +7,7 @@ import com.isaacbfbu.studygroup.models.Course;
 import com.isaacbfbu.studygroup.models.TextPost;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.facebook.ParseFacebookUtils;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -39,6 +40,8 @@ public class ParseApplication extends Application {
                 .clientKey("E697C774902E5C9D865FD97F9FEA685C77D6D656F12E194DC074FEC1E7D7B248")  // set explicitly unless clientKey is explicitly configured on Parse server
                 .clientBuilder(builder)
                 .server("https://isaac-studygroup.herokuapp.com/parse/").build());
+
+        ParseFacebookUtils.initialize(this);
     }
 }
 

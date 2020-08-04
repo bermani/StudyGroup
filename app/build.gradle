@@ -56,4 +56,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.github.dhaval2404:imagepicker:1.7.3'
+    implementation 'com.facebook.android:facebook-login:[5,6)'
+    implementation "com.github.parse-community.Parse-SDK-Android:facebook:1.25.0"
 }
