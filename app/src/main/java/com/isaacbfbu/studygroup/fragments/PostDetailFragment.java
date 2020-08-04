@@ -1,17 +1,24 @@
 package com.isaacbfbu.studygroup.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.isaacbfbu.studygroup.MainActivity;
 import com.isaacbfbu.studygroup.databinding.FragmentPostDetailBinding;
 import com.isaacbfbu.studygroup.models.TextPost;
+import com.parse.DeleteCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class PostDetailFragment extends Fragment {
 
@@ -19,6 +26,7 @@ public class PostDetailFragment extends Fragment {
 
     MainActivity activity;
     FragmentPostDetailBinding binding;
+    AlertDialog.Builder alertDialogBuilder;
 
     private TextPost post;
 
@@ -32,6 +40,57 @@ public class PostDetailFragment extends Fragment {
         args.putParcelable(POST_PARAM, post);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private void configureAlertDialogBuilder() {
+        alertDialogBuilder = new AlertDialog.Builder(activity);
+        if (post.getAuthor().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())) {
+            alertDialogBuilder.setTitle("are you sure you want to delete?");
+            alertDialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    activity.setMyProgressBarVisibility(true);
+                    post.deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null) {
+                                Toast.makeText(activity, "There was an error when attempting to delete your post", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(activity, "Your post was deleted successfully", Toast.LENGTH_SHORT).show();
+                            }
+                            activity.setMyProgressBarVisibility(false);
+                            activity.goHome();
+                        }
+                    });
+                }
+            });
+            alertDialogBuilder.setNegativeButton("Cancel", null);
+        } else {
+            alertDialogBuilder.setTitle("why are you reporting this post?");
+            alertDialogBuilder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    post.addToReports();
+                    activity.setMyProgressBarVisibility(true);
+                    post.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null) {
+                                Toast.makeText(activity, "There was an error recording your report", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(activity, "Your report was recorded successfully", Toast.LENGTH_SHORT).show();
+                            }
+                            activity.setMyProgressBarVisibility(false);
+                            activity.goHome();
+
+                        }
+                    });
+                }
+            });
+            alertDialogBuilder.setNegativeButton("Cancel", null);
+            alertDialogBuilder.setMultiChoiceItems(new String[]{"it's offensive", "it's inappropriate", "it's irrelevant to the course"}, null, null);
+        }
+
     }
 
     @Override
@@ -56,7 +115,18 @@ public class PostDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        configureAlertDialogBuilder();
+
         binding.tvName.setText(post.getAuthorName());
         binding.tvContent.setText(post.getContent());
+        binding.btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogBuilder.create().show();
+            }
+        });
+        if (post.getAuthor().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())) {
+            binding.btnReport.setText("Delete");
+        }
     }
 }

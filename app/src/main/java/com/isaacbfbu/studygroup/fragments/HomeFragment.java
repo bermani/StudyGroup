@@ -86,6 +86,7 @@ public class HomeFragment extends Fragment {
 
         query.whereContainedIn(TextPost.KEY_COURSE, list);
         query.addDescendingOrder("createdAt");
+        query.whereNotEqualTo("reports", ParseUser.getCurrentUser().getObjectId());
 
         query.include(TextPost.KEY_AUTHOR);
         query.include(TextPost.KEY_COURSE);

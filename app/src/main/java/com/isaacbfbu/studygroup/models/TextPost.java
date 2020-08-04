@@ -4,11 +4,14 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+
 @ParseClassName("TextPost")
 public class TextPost extends ParseObject {
     public static final String KEY_CONTENT = "content";
     public static final String KEY_COURSE = "course";
     public static final String KEY_AUTHOR = "author";
+    public static final String KEY_REPORTS = "reports";
 
     public String getContent() {
         return getString(KEY_CONTENT);
@@ -40,5 +43,14 @@ public class TextPost extends ParseObject {
 
     public String getAuthorName() {
         return getParseUser(KEY_AUTHOR).getUsername();
+    }
+
+    public JSONArray getReports() {
+        return getJSONArray(KEY_REPORTS);
+    }
+
+    public void addToReports() {
+        String userId = ParseUser.getCurrentUser().getObjectId();
+        add(KEY_REPORTS, userId);
     }
 }
