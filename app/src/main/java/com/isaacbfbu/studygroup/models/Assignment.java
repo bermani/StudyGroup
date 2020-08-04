@@ -13,6 +13,7 @@ public class Assignment extends ParseObject {
     public static final String KEY_COURSE = "course";
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_DATE = "dueDate";
+    public static final String KEY_DESCRIPTION = "description";
 
     public String getTitle() {
         return getString(KEY_TITLE);
@@ -53,5 +54,13 @@ public class Assignment extends ParseObject {
 
     public void setDate(Date date) {
         put(KEY_DATE, date);
+    }
+
+    public void setDescription(String description) {
+        put(KEY_DESCRIPTION, description);
+    }
+
+    public String getDescription() {
+        return getString(KEY_DESCRIPTION);
     }
 }

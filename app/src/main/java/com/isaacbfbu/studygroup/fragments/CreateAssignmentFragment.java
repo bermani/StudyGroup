@@ -79,12 +79,13 @@ public class CreateAssignmentFragment extends Fragment {
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Assignment assignment = new Assignment();
+                final Assignment assignment = new Assignment();
                 assignment.setAuthor(ParseUser.getCurrentUser());
                 Course selectedCourse = (Course) binding.spinner.getSelectedItem();
                 assignment.setCourse(selectedCourse);
                 assignment.setTitle(binding.etTitle.getText().toString());
                 assignment.setDate(getDateFromDatePicker(binding.datePicker));
+                assignment.setDescription(binding.etDescription.getText().toString());
                 activity.setMyProgressBarVisibility(true);
                 assignment.saveInBackground(new SaveCallback() {
                     @Override
@@ -93,8 +94,14 @@ public class CreateAssignmentFragment extends Fragment {
                             Log.e(TAG, "Error saving assignment", e);
                             return;
                         }
-                        activity.setMyProgressBarVisibility(false);
-                        activity.goHome();
+                        ParseUser.getCurrentUser().add("subscribedAssignments", assignment.getObjectId());
+                        ParseUser.getCurrentUser().saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                activity.setMyProgressBarVisibility(false);
+                                activity.goHome();
+                            }
+                        });
                     }
                 });
             }
