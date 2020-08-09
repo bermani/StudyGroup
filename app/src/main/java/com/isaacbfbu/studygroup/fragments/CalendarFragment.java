@@ -46,6 +46,8 @@ import java.util.Set;
 
 public class CalendarFragment extends Fragment {
 
+    public static final int DOTS = Color.parseColor("#D08364");
+
     MainActivity activity;
     FragmentCalendarBinding binding;
 
@@ -91,7 +93,7 @@ public class CalendarFragment extends Fragment {
             @Override
             public void decorate(DayViewFacade view) {
                 view.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.circle));
-                view.addSpan(new ForegroundColorSpan(Color.RED));
+                view.addSpan(new ForegroundColorSpan(Color.parseColor("#D08364")));
             }
         });
         binding.calendarView.setSelectedDate(CalendarDay.today());
@@ -153,7 +155,7 @@ public class CalendarFragment extends Fragment {
 
                     @Override
                     public void decorate(DayViewFacade view) {
-                        view.addSpan(new DotSpan(5, Color.RED));
+                        view.addSpan(new DotSpan(5, DOTS));
                     }
                 });
                 activity.setMyProgressBarVisibility(false);

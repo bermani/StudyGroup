@@ -20,6 +20,7 @@ import com.isaacbfbu.studygroup.fragments.HomeFragment;
 import com.isaacbfbu.studygroup.fragments.ProfileFragment;
 import com.isaacbfbu.studygroup.fragments.SearchFragment;
 import com.isaacbfbu.studygroup.utils.OnSwipeTouchListener;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ParsePush.subscribeInBackground("test");
 
         fragmentManager = getSupportFragmentManager();
 

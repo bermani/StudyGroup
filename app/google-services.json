@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "56875101621",
+    "firebase_url": "https://isaac-studygroup-notifications.firebaseio.com",
+    "project_id": "isaac-studygroup-notifications",
+    "storage_bucket": "isaac-studygroup-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56875101621:android:4b711ba9abef70950c3dfc",
+        "android_client_info": {
+          "package_name": "com.isaacbfbu.studygroup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56875101621-j8n8kn298mgivbhp47d53rue0dc5ttm5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8KspNbA9ueQOkqk3-YKqER9X6SU7A-Zo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56875101621-j8n8kn298mgivbhp47d53rue0dc5ttm5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

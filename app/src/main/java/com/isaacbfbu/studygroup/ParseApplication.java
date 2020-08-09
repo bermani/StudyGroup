@@ -6,6 +6,7 @@ import com.isaacbfbu.studygroup.models.Assignment;
 import com.isaacbfbu.studygroup.models.Course;
 import com.isaacbfbu.studygroup.models.TextPost;
 import com.parse.Parse;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.facebook.ParseFacebookUtils;
 
@@ -42,6 +43,8 @@ public class ParseApplication extends Application {
                 .server("https://isaac-studygroup.herokuapp.com/parse/").build());
 
         ParseFacebookUtils.initialize(this);
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 }
 
