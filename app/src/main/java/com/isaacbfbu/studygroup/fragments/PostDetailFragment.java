@@ -94,7 +94,6 @@ public class PostDetailFragment extends Fragment {
             alertDialogBuilder.setNegativeButton("Cancel", null);
             alertDialogBuilder.setMultiChoiceItems(new String[]{"it's offensive", "it's inappropriate", "it's irrelevant to the course"}, null, null);
         }
-
     }
 
     @Override

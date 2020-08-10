@@ -14,6 +14,7 @@ public class Assignment extends ParseObject {
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_DATE = "dueDate";
     public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_REPORTS = "reportUsers";
 
     public String getTitle() {
         return getString(KEY_TITLE);
@@ -62,5 +63,10 @@ public class Assignment extends ParseObject {
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
+    }
+
+    public void addToReports() {
+        String userId = ParseUser.getCurrentUser().getObjectId();
+        add(KEY_REPORTS, userId);
     }
 }

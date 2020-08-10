@@ -129,6 +129,7 @@ public class CalendarFragment extends Fragment {
         List<String> list = JSONArrayUtils.jsonArrayToArrayList(ParseUser.getCurrentUser().getJSONArray("enrolled"));
 
         query.whereContainedIn(Assignment.KEY_COURSE, list);
+        query.whereNotEqualTo(Assignment.KEY_REPORTS, ParseUser.getCurrentUser().getObjectId());
         query.include("author");
 
         activity.setMyProgressBarVisibility(true);
@@ -159,9 +160,12 @@ public class CalendarFragment extends Fragment {
                         view.addSpan(new DotSpan(5, DOTS));
                     }
                 });
+
                 activity.setMyProgressBarVisibility(false);
                 String selectedDate = localDateFormatter.format(LocalDate.now());
-                adapter.addAll(map.get(selectedDate));
+                if (map.get(selectedDate) != null) {
+                    adapter.addAll(map.get(selectedDate));
+                }
             }
         });
     }

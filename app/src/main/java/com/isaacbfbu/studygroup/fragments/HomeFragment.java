@@ -102,6 +102,10 @@ public class HomeFragment extends Fragment {
                 adapter.addAll(objects);
                 swipeContainer.setRefreshing(false);
                 activity.setMyProgressBarVisibility(false);
+
+                if (objects.size() == 0) {
+                    binding.tvEmpty.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
