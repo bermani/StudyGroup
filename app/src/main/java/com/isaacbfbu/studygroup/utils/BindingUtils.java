@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 public class BindingUtils {
     static SimpleDateFormat dateFormatter = new SimpleDateFormat("h:mm a, MMM d");
+    static SimpleDateFormat onlyDateFormatter = new SimpleDateFormat("MMM d");
 
     public static void bindCourseItem(final MainActivity context, final ItemCourseBinding binding, final Course course) {
         binding.tvTitle.setText(course.getTitle());
@@ -80,7 +81,7 @@ public class BindingUtils {
     public static void bindEventItem(final MainActivity context, final ItemAssignmentBinding binding, final Assignment event) {
         binding.tvTitle.setText(event.getTitle());
         binding.tvAuthor.setText("posted by " + event.getAuthorName());
-        binding.tvDueDate.setText("due at " + dateFormatter.format(event.getDueDate()));
+        binding.tvDueDate.setText("due on " + onlyDateFormatter.format(event.getDueDate()));
 
         binding.layout.setOnClickListener(new View.OnClickListener() {
             @Override
