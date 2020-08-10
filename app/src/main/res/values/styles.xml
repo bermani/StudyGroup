@@ -5,6 +5,8 @@
         <item name="colorPrimary">#94D2B1</item>
         <item name="colorPrimaryDark">#777D76</item>
         <item name="colorAccent">#A3491A</item>
+        <item name="android:actionBarSize">32dp</item>
+        <item name="actionBarSize">32dp</item>
     </style>
 
 </resources>

@@ -12,11 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.isaacbfbu.studygroup.MainActivity;
+import com.isaacbfbu.studygroup.R;
 import com.isaacbfbu.studygroup.databinding.FragmentPostDetailBinding;
 import com.isaacbfbu.studygroup.models.TextPost;
+import com.isaacbfbu.studygroup.utils.ParseUtils;
 import com.parse.DeleteCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -117,8 +121,43 @@ public class PostDetailFragment extends Fragment {
 
         configureAlertDialogBuilder();
 
-        binding.tvName.setText(post.getAuthorName());
-        binding.tvContent.setText(post.getContent());
+        binding.itemPost.tvContent.setText(post.getContent());
+        binding.itemPost.tvName.setText(post.getAuthorName());
+        binding.itemPost.tvCourse.setText(post.getCourseTitle());
+        String url = ParseUtils.getProfilePhotoURL(post.getAuthor());
+        Glide.with(activity).load(url).placeholder(R.drawable.person_24px).circleCrop().into(binding.itemPost.ivProfilePhoto);
+        ParseFile image = post.getImage();
+        if (image != null) {
+            Glide.with(activity).load(image.getUrl()).into(binding.itemPost.ivPost);
+        } else {
+            binding.itemPost.ivPost.setVisibility(View.GONE);
+        }
+
+        binding.itemPost.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserDetailFragment fragment = UserDetailFragment.newInstance(post.getAuthor());
+                activity.goForward(fragment);
+            }
+        });
+
+        binding.itemPost.ivProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserDetailFragment fragment = UserDetailFragment.newInstance(post.getAuthor());
+                activity.goForward(fragment);
+            }
+        });
+
+        binding.itemPost.tvCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CourseDetailFragment fragment = CourseDetailFragment.newInstance(post.getCourse());
+                activity.goForward(fragment);
+            }
+        });
+
+
         binding.btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

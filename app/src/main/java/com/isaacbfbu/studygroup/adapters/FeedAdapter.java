@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,9 +26,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     MainActivity context;
     List<TextPost> results;
-    HomeFragment fragment;
+    Fragment fragment;
 
-    public FeedAdapter(MainActivity context, List<TextPost> results, HomeFragment fragment) {
+    public FeedAdapter(MainActivity context, List<TextPost> results, Fragment fragment) {
         this.context = context;
         this.results = results;
         this.fragment = fragment;
@@ -73,6 +74,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             }
 
             binding.tvContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PostDetailFragment fragment = PostDetailFragment.newInstance(textPost);
+                    context.goForward(fragment);
+                }
+            });
+
+            binding.ivPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     PostDetailFragment fragment = PostDetailFragment.newInstance(textPost);

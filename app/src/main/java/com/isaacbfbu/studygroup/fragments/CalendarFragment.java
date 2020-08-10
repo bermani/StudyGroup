@@ -32,6 +32,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
+import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
@@ -159,6 +160,8 @@ public class CalendarFragment extends Fragment {
                     }
                 });
                 activity.setMyProgressBarVisibility(false);
+                String selectedDate = localDateFormatter.format(LocalDate.now());
+                adapter.addAll(map.get(selectedDate));
             }
         });
     }
